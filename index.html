@@ -1,0 +1,68 @@
+<html>
+
+<head>
+<title>Project 2 - INFO 5100 - Data-driven Web Pages</title>
+<style>
+	body {font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif; padding-right:60px; padding-left: 60px; }
+	svg {border: solid #ccc 1px; }
+</style>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+
+<body>
+
+<script>
+	//Declare variables
+	var movieData;
+	//Filter variables
+	var duration;
+	var genres;
+	var year;
+	var country;
+	var language;
+	//Factor variables
+	var actorLikes;
+	var budget;
+	var gross;
+	var score;
+	var movieLikes;
+	//Movie Info variables
+	var title;
+	var keywords;
+	var link;
+
+	//organize data
+	var parseRow = function(line){
+		return {
+			//Filter data
+			duration: Number(line["duration"]),
+			genres: line["genres"],
+			year: Number(line["title_year"]),
+			country: line["country"],
+			language: line["language"],
+
+			//Factor data
+			actorLikes: Number(line["actor_1_facebook_likes"]),
+			budget: Number(line["budget"]),
+			gross: Number(line["gross"]),
+			score: Number(line["imdb_score"]),
+			movieLikes: Number(line["movie_facebook_likes"]),
+
+			//Movie Info data
+			title: line["movie_title"],
+			keywords: line["plot_keywords"],
+			link: line["movie_imdb_link"],
+		}
+	};
+
+	d3.csv("movie_metadata.csv", parseRow, function(error, data){
+		movieData = data;
+	});
+
+
+	//applied to all rows, select 
+</script>
+
+</body>
+
+</html>
