@@ -14,9 +14,10 @@
 <script>
 	//Declare variables
 	var movieData;
+	var awardData;
 
 	//organize data
-	var parseRow = function(line){
+	var parseRow1 = function(line){
 		return {
 			//Filter data
 			duration: Number(line["duration"]),
@@ -39,12 +40,22 @@
 		}
 	};
 
-	d3.csv("movie_metadata.csv", parseRow, function(error, data){
+	var parseRow2 = function(line){
+		return {
+			year: line["Year"],
+			award: line["Award"],
+			filmName: line["Film"],
+		}
+	};
+
+	d3.queue()
+	.defer(d3.csv, "movie_metadata.csv", parseRow1)
+	.defer(d3.csv, "award.csv", parseRow2)
+	.await(function(error, data, award){
 		movieData = data;
-	});
-
-
-	//applied to all rows, select 
+		awardData = award;
+		
+	})
 </script>
 
 </body>
