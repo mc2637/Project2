@@ -13,8 +13,8 @@
 
 <script>
 	//Declare variables
-	var movieData;
-	var awardData;
+	var movieData = [];
+	var awardData = [];
 
 	//organize data
 	var parseRow1 = function(line){
@@ -24,7 +24,7 @@
 			genres: line["genres"],
 			year: Number(line["title_year"]),
 			country: line["country"],
-			language: line["language"],
+			language: line["language"], //not actual filter
 
 			//Factor data
 			actorLikes: Number(line["actor_1_facebook_likes"]),
@@ -42,7 +42,7 @@
 
 	var parseRow2 = function(line){
 		return {
-			year: line["Year"],
+			year: Number(line["Year"]),
 			award: line["Award"],
 			filmName: line["Film"],
 		}
@@ -52,9 +52,27 @@
 	.defer(d3.csv, "movie_metadata.csv", parseRow1)
 	.defer(d3.csv, "award.csv", parseRow2)
 	.await(function(error, data, award){
-		movieData = data;
-		awardData = award;
-		
+		award.forEach(function(d){
+			if(d.year>2000){
+				awardData.push(d);
+			}
+		});
+
+		data.forEach(function(d){
+			if(d.duration && d.genres && d.year>2000 && d.country && d.language == "English" && d.actorLikes && d.budget && d.gross && d.score && d.movieLikes && d.title && d.keywords && d.link){
+				movieData.push(d);
+			}
+		});
+
+		movieData.forEach(function(movie){
+			awardData.forEach(function(award){
+				if(movie.title.toUpperCase().trim() === award.filmName.toUpperCase() && movie.year == award.year){
+					if(){
+						
+					}
+				}
+			})
+		})
 	})
 </script>
 
