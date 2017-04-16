@@ -64,15 +64,31 @@
 			}
 		});
 
+		var count1 = 0;
+		var count2 = 0;
+		var index = 0;
 		movieData.forEach(function(movie){
 			awardData.forEach(function(award){
-				if(movie.title.toUpperCase().trim() === award.filmName.toUpperCase() && movie.year == award.year){
-					if(){
-						
-					}
+				//** if we compare movies with both name and year, it has 792 movies; if we only check the names, there are 812. And there are 1 film with multiple awards
+				//stuck on 1: duplicated awards 2: delete non-awarded films
+				if(movie.title.toUpperCase().trim() === award.filmName.toUpperCase()  && movie.year == award.year){
+					// if(!movie.award){
+					// 	movie.award = award.award;
+					// }
+					movie.award = award.award;
+					count1++;
+				}
+				else{
+					index = movieData.indexOf(movie);
+					console.log(index);
+					movieData.splice(index,1);
+					count2++;
 				}
 			})
+			//console.log(movie.award);
 		})
+
+				console.log("1: "+ count1 +" "+ "2: "+count2);
 	})
 </script>
 
