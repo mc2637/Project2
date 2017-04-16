@@ -92,6 +92,10 @@ color scale 2: dark blue - #000066, yellow - #F0D201, orange - #F6821F
    margin-bottom: 20px;
 }
 
+.styled-select#genreSelect, .styled-select#genreSelect select{
+   height: 300px;
+}
+
 .styled-select select {
    background: transparent;
    border: none;

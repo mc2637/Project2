@@ -32,45 +32,47 @@
 				<h3>Choose filters</h3>
 
 				<div class="styled-select orange rect-square">
-				  <select>
-				  	<option>Year - All</option>
-				    <option>Year 2001 t0 2005</option>
-				    <option>Year 2006 t0 2010</option>
-				    <option>Year 2011 t0 2015</option>
+				  <select id="yearDropdown">
+				  	<option value="all">Year - All</option>
+				    <option value="yearRange1">Year 2001 t0 2005</option>
+				    <option value="yearRange2">Year 2006 t0 2010</option>
+				    <option value="yearRange3">Year 2011 t0 2016</option>
 				  </select>
 				</div>
 
 				<div class="styled-select orange rect-square">
-				  <select>
-				  	<option>Duration - All</option>
-				    <option>Duration > 90 minutes</option>
+				  <select id="durationDropdown">
+				  	<option value="all">Duration - All</option>
+				    <option value="lessthan90">Duration < 90 minutes</option>
+				    <option value="lessthan120">Duration < 120 minutes</option>
+				    <option value="lessthan180">Duration < 180 minutes</option>
 				  </select>
 				</div>
 
-				<div class="styled-select orange rect-square">
-				  <select>
-				  	<option>Genre - All</option>
-				    <option>Genre - Action</option>
-				    <option>Genre - Adventure</option>
-				    <option>Genre - Fantasy</option>
-					<option>Genre - Sci-Fi</option>
-					<option>Genre - Thriller</option>
-					<option>Genre - Romance</option>
-					<option>Genre - Animation</option>
-					<option>Genre - Comedy</option>
-					<option>Genre - Family</option>
-					<option>Genre - Musical</option>
-					<option>Genre - Mystery</option>
-					<option>Genre - Western</option>
-					<option>Genre - Drama</option>
-					<option>Genre - History</option>
-					<option>Genre - Sport</option>
-					<option>Genre - Horror</option>
-					<option>Genre - Crime</option>
-					<option>Genre - War</option>
-					<option>Genre - Biography</option>
-					<option>Genre - Film-Noir</option>
-					<option>Genre - Short</option>
+				<div class="styled-select orange rect-square" id="genreSelect">
+				  <select id="genreDropdown" multiple="">
+				  	<option value="all">Genre - All</option>
+				    <option value="action">Genre - Action</option>
+				    <option value="adventure">Genre - Adventure</option>
+				    <option value="fantasy">Genre - Fantasy</option>
+					<option value="sci-fi">Genre - Sci-Fi</option>
+					<option value="thriller">Genre - Thriller</option>
+					<option value="romance">Genre - Romance</option>
+					<option value="animation">Genre - Animation</option>
+					<option value="comedy">Genre - Comedy</option>
+					<option value="family">Genre - Family</option>
+					<option value="musical">Genre - Musical</option>
+					<option value="mystery">Genre - Mystery</option>
+					<option value="western">Genre - Western</option>
+					<option value="drama">Genre - Drama</option>
+					<option value="history">Genre - History</option>
+					<option value="sport">Genre - Sport</option>
+					<option value="horror">Genre - Horror</option>
+					<option value="crime">Genre - Crime</option>
+					<option value="war">Genre - War</option>
+					<option value="biography">Genre - Biography</option>
+					<option value="film-noir">Genre - Film-Noir</option>
+					<option value="short">Genre - Short</option>
 				  </select>
 				</div>
 
@@ -99,7 +101,7 @@
 					</li>
 				</ul>
 
-				<button type="button" class="view-graph-btn">Show Movies</button>
+				<button type="button" class="view-graph-btn" onclick="showMovies()">Show Movies</button>
 
 			</div>
 
@@ -176,6 +178,49 @@
 			})
 		})
 	});
+
+
+	function showMovies(){
+
+		// list of input variables for showMovies function
+		var year = document.getElementById("yearDropdown");
+		var yearSelected = year.options[year.selectedIndex].value;
+
+		var duration = document.getElementById("durationDropdown");
+		var durationSelected = duration.options[duration.selectedIndex].value;
+
+		var genre = document.getElementById("genreDropdown");
+		var genreSelectedArray = genre.selectedOptions;
+		var genreSelectedValues = [];
+
+		var factorsArray = document.getElementsByClassName("css-checkbox");
+		var factorsSelected = [];
+
+		// getting genre values from multiselect
+		if(genreSelectedArray.length > 0){
+			for(var j=0; j< genreSelectedArray.length; j++){
+				genreSelectedValues.push(genreSelectedArray[j].value);
+			}	
+		} else{
+			genreSelectedValues.push("all");
+		}
+
+		if(factorsArray.length > 0){
+			for(var i=0; i< factorsArray.length; i++){
+				if(factorsArray[i].checked == true){
+					factorsSelected.push(factorsArray[i].value);
+				}
+			}
+		}
+
+		console.log("Year - "+yearSelected); 
+		console.log("Duration - "+durationSelected); 
+		console.log("Genre - "+genreSelectedValues) 
+		console.log("Factors - "+factorsSelected);
+
+	}
+	
+
 </script>
 <!-- References: 
 select dropdown styling: https://codepen.io/ericrasch/pen/zjDBx
