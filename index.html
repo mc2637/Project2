@@ -3,13 +3,111 @@
 <head>
 <title>Project 2 - INFO 5100 - Data-driven Web Pages</title>
 <style>
-	body {font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif; padding-right:60px; padding-left: 60px; }
+	html {padding: 0; margin: 0;}
+	body {font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif; margin: 0;}
 	svg {border: solid #ccc 1px; }
 </style>
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oleo+Script" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
 <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 
 <body>
+
+	<div class="movie-main-container">
+
+		<div class="movie-banner-container"></div>
+
+		<div class="movie-title-container">
+			
+			<h1 class="title">The most popular 21st century movies</h1>
+
+		</div>
+
+		<div class="movie-visualization-container">
+
+			<div class="inner-left-container">
+				
+				<h3>Choose filters</h3>
+
+				<div class="styled-select orange rect-square">
+				  <select>
+				  	<option>Year - All</option>
+				    <option>Year 2001 t0 2005</option>
+				    <option>Year 2006 t0 2010</option>
+				    <option>Year 2011 t0 2015</option>
+				  </select>
+				</div>
+
+				<div class="styled-select orange rect-square">
+				  <select>
+				  	<option>Duration - All</option>
+				    <option>Duration > 90 minutes</option>
+				  </select>
+				</div>
+
+				<div class="styled-select orange rect-square">
+				  <select>
+				  	<option>Genre - All</option>
+				    <option>Genre - Action</option>
+				    <option>Genre - Adventure</option>
+				    <option>Genre - Fantasy</option>
+					<option>Genre - Sci-Fi</option>
+					<option>Genre - Thriller</option>
+					<option>Genre - Romance</option>
+					<option>Genre - Animation</option>
+					<option>Genre - Comedy</option>
+					<option>Genre - Family</option>
+					<option>Genre - Musical</option>
+					<option>Genre - Mystery</option>
+					<option>Genre - Western</option>
+					<option>Genre - Drama</option>
+					<option>Genre - History</option>
+					<option>Genre - Sport</option>
+					<option>Genre - Horror</option>
+					<option>Genre - Crime</option>
+					<option>Genre - War</option>
+					<option>Genre - Biography</option>
+					<option>Genre - Film-Noir</option>
+					<option>Genre - Short</option>
+				  </select>
+				</div>
+
+				<h3 class="second">Select 2 factors to plot</h3>
+				
+				<ul>
+					<li>
+						<input type="checkbox" class="css-checkbox" id="budget" name="factor" value="budget" />
+						<label class="css-label" for="budget">Movie budget</label>
+					</li>
+					<li>
+						<input type="checkbox" class="css-checkbox" id="imdbScore" name="factor" value="imdbScore" /> 
+						<label class="css-label" for="imdbScore">Imdb rating</label>
+					</li>
+					<li>
+						<input type="checkbox" class="css-checkbox" id="gross" name="factor" value="gross" /> 
+						<label class="css-label" for="gross">Gross earnings</label>
+					</li>
+					<li>
+						<input type="checkbox" class="css-checkbox" id="movieLikes" name="factor" value="movieLikes" /> 
+						<label class="css-label" for="movieLikes">Movie facebook likes</label>
+					</li>
+					<li>
+						<input type="checkbox" class="css-checkbox" id="actorLikes" name="factor" value="actorLikes" /> 
+						<label class="css-label" for="actorLikes">Lead actor facebook likes</label>
+					</li>
+				</ul>
+
+				<button type="button" class="view-graph-btn">Show Movies</button>
+
+			</div>
+
+			<div class="inner-right-container"></div>
+
+		</div>
+
+	</div>
 
 <script>
 	//Declare variables
@@ -91,7 +189,10 @@
 				console.log("1: "+ count1 +" "+ "2: "+count2);
 	})
 </script>
-
+<!-- References: 
+select dropdown styling: https://codepen.io/ericrasch/pen/zjDBx
+checkbox styling: http://www.csscheckbox.com/checkbox/42432/padded-orange-check/
+-->
 </body>
 
 </html>
