@@ -34,9 +34,9 @@
 				<div class="styled-select orange rect-square">
 				  <select id="yearDropdown">
 				  	<option value="all">Year - All</option>
-				    <option value="yearRange1">Year 2001 t0 2005</option>
-				    <option value="yearRange2">Year 2006 t0 2010</option>
-				    <option value="yearRange3">Year 2011 t0 2016</option>
+				    <option value="yearRange1">Year 2001 to 2005</option>
+				    <option value="yearRange2">Year 2006 to 2010</option>
+				    <option value="yearRange3">Year 2011 to 2016</option>
 				  </select>
 				</div>
 
@@ -105,7 +105,9 @@
 
 			</div>
 
-			<div class="inner-right-container"></div>
+			<div class="inner-right-container">
+				<svg id ="moviePlot" height="600" weight="600"></svg>
+			</div>
 
 		</div>
 
@@ -115,6 +117,16 @@
 	//Declare variables
 	var movieData = [];
 	var awardData = [];
+
+	//filters and factors w/ initial values
+	var yearFilter1 = 2001;
+	var yearFilter2 = 2016;
+	var durationFilter = 500;
+	var genreFilter = false;
+	var xFactor = "budget";
+	var yFactor = "imdbScore"
+
+	var selectedMovies = [];
 
 	//organize data
 	var parseRow1 = function(line){
@@ -218,6 +230,57 @@
 		console.log("Genre - "+genreSelectedValues) 
 		console.log("Factors - "+factorsSelected);
 
+		//selected year filter
+		if(yearSelected == "yearRange1"){
+			yearFilter1 = 2001;
+			yearFilter2 = 2005;
+		}
+		else if(yearSelected == "yearRange2"){
+			yearFilter1 = 2006;
+			yearFilter2 = 2010;
+		}
+		else if(yearSelected == "yearRange3"){
+			yearFilter1 = 2011;
+			yearFilter2 = 2016;
+		}
+
+		//selected duration filter
+		if(durationSelected == "lessthan90"){
+			durationFilter = 90;
+		}
+		else if(durationSelected == "lessthan120"){
+			durationFilter = 120;
+		}
+		else if(durationSelected == "lessthan180"){
+			durationFilter = 180;
+		}
+
+
+		//selected factors
+		xFactor = factorsSelected[0];
+		yFactor = factorsSelected[1];
+
+		//create selectedMovie array according to new filter
+		movieData.forEach(function(d){
+			//selected genre "all"
+			genreFilter = genreSelectedValues.includes("all");
+			
+			for(var m=0; m<genreSelectedValues.length; m++){
+				if(!genreFilter){
+					genreFilter = d.genres.toUpperCase().trim().includes(genreSelectedValues[m].toUpperCase().trim());
+				}		
+			}
+
+			if((d.year>=yearFilter1 && d.year<=yearFilter2) && d.duration<durationFilter && genreFilter){
+				selectedMovies.push(d);
+			}
+		});
+
+		console.log("year filter: "+ yearFilter1+ ", to "+yearFilter2);
+		console.log("duration filter: "+ durationFilter);
+		console.log("genre filter: " + genreFilter);
+		console.log("factor x: "+ xFactor);
+		console.log("factor y: "+ yFactor);
 	}
 	
 
