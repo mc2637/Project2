@@ -5,7 +5,16 @@
 <style>
 	html {padding: 0; margin: 0;}
 	body {font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif; margin: 0;}
-	svg {border: solid #ccc 1px; }
+	svg {border: solid "black" 1px; }
+	.axisWhite line{
+		stroke: white;
+	}
+	.axisWhite path{
+		stroke: white;
+	}
+	.axisWhite text{
+		stroke: white;
+	}
 </style>
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oleo+Script" rel="stylesheet">
@@ -84,10 +93,6 @@
 						<label class="css-label" for="budget">Movie budget</label>
 					</li>
 					<li>
-						<input type="checkbox" class="css-checkbox" id="imdbScore" name="factor" value="imdbScore" /> 
-						<label class="css-label" for="imdbScore">Imdb rating</label>
-					</li>
-					<li>
 						<input type="checkbox" class="css-checkbox" id="gross" name="factor" value="gross" /> 
 						<label class="css-label" for="gross">Gross earnings</label>
 					</li>
@@ -99,6 +104,10 @@
 						<input type="checkbox" class="css-checkbox" id="actorLikes" name="factor" value="actorLikes" /> 
 						<label class="css-label" for="actorLikes">Lead actor facebook likes</label>
 					</li>
+					<li>
+						<input type="checkbox" class="css-checkbox" id="imdbScore" name="factor" value="imdbScore" /> 
+						<label class="css-label" for="imdbScore">Imdb rating</label>
+					</li>
 				</ul>
 
 				<button type="button" class="view-graph-btn" onclick="showMovies()">Show Movies</button>
@@ -106,7 +115,7 @@
 			</div>
 
 			<div class="inner-right-container">
-				<svg id ="moviePlot" height="600" width="600"></svg>
+				<svg id ="moviePlot" height="800" width="800"></svg>
 			</div>
 
 		</div>
@@ -126,9 +135,9 @@
 	var xFactor = "budget";
 	var yFactor = "imdbScore"
 
-	var selectedMovies = [];
-
 	var moviePlot = d3.select("#moviePlot");
+
+	var selectedMovies = [];
 
 	//organize data
 	var parseRow1 = function(line){
@@ -227,11 +236,6 @@
 			}
 		}
 
-		// console.log("Year - "+yearSelected); 
-		// console.log("Duration - "+durationSelected); 
-		// console.log("Genre - "+genreSelectedValues) 
-		// console.log("Factors - "+factorsSelected);
-
 		//selected year filter
 		if(yearSelected == "yearRange1"){
 			yearFilter1 = 2001;
@@ -264,8 +268,6 @@
 
 		var budgetMin=0;
 		var budgetMax=0;
-		var imdbScoreMin=0;
-		var imdbScoreMax=0;
 		var grossMin=0;
 		var grossMax=0;
 		var movieLikesMin=0;
@@ -291,9 +293,6 @@
 				if(budgetMin==0 || d.budget<budgetMin){budgetMin=d.budget};
 				if(budgetMax==0 || d.budget>budgetMax){budgetMax=d.budget};
 
-				if(imdbScoreMin==0 || d.score<imdbScoreMin){imdbScoreMin=d.score};
-				if(imdbScoreMax==0 || d.score>imdbScoreMax){imdbScoreMax=d.score};
-
 				if(grossMin==0 || d.gross<grossMin){grossMin=d.gross};
 				if(grossMax==0 || d.gross>grossMax){grossMax=d.gross};
 
@@ -314,77 +313,75 @@
 						.data(selectedMovies)
 						.enter()
 						.append("circle")
-						.attr("r", 5)
+						.attr("r", 10)
 						.attr("fill", "#F6821F")
 						.style("opacity", 0.7);
 
+		circles.exit().remove();
 
 		if(xFactor == "budget"){
-			xScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([50,550]);
+			xScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([50,750]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.budget);});
 
 		} else if(xFactor == "imdbScore"){
-			xScale = d3.scaleLinear().domain([imdbScoreMin,imdbScoreMax]).range([50,550]);
+			xScale = d3.scaleLinear().domain([0,10]).range([50,750]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.score);});
 
 		}else if(xFactor == "gross"){
-			xScale = d3.scaleLinear().domain([grossMin,grossMax]).range([50,550]);
+			xScale = d3.scaleLinear().domain([grossMin,grossMax]).range([50,750]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.gross);});
 
 		}else if(xFactor == "movieLikes"){
-			xScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([50,550]);
+			xScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([50,750]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.movieLikes);});
 
 		}else if(xFactor == "actorLikes"){
-			xScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([50,550]);
+			xScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([50,750]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.actorLikes);});
 		};
 
 		if(yFactor == "budget"){
-			yScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([50,550]);
+			yScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([750,50]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.budget);});
 
 		} else if(yFactor == "imdbScore"){
-			yScale = d3.scaleLinear().domain([imdbScoreMin,imdbScoreMax]).range([50,550]);
+			yScale = d3.scaleLinear().domain([0,10]).range([750,50]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.score);});
 
 		}else if(yFactor == "gross"){
-			yScale = d3.scaleLinear().domain([grossMin,grossMax]).range([50,550]);
+			yScale = d3.scaleLinear().domain([grossMin,grossMax]).range([750,50]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.gross);});
 
 		}else if(yFactor == "movieLikes"){
-			yScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([50,550]);
+			yScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([750,50]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.movieLikes);});
 
 		}else if(yFactor == "actorLikes"){
-			yScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([50,550]);
+			yScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([750,50]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.actorLikes);});
 		};
 
 		var xAxis = d3.axisBottom(xScale);
-		moviePlot.append("g").attr("transform", "translate(0,550)").call(xAxis);
+		moviePlot.append("g")
+			.attr("transform", "translate(0,750)")
+			.attr("class", "axisWhite")
+			.call(xAxis);
 
 		var yAxis = d3.axisLeft(yScale);
-		moviePlot.append("g").attr("transform", "translate(50, 0)").call(yAxis);
-
-
-
-
-		// console.log("year filter: "+ yearFilter1+ ", to "+yearFilter2);
-		// console.log("duration filter: "+ durationFilter);
-		// console.log("genre filter: " + genreFilter);
-		// console.log("factor x: "+ xFactor);
-		// console.log("factor y: "+ yFactor);
+		moviePlot.append("g")
+			.attr("class", "axisWhite")
+			.attr("transform", "translate(50, 0)")
+			.call(yAxis);
 	}
 	
 
