@@ -27,16 +27,19 @@ h1.title{
 	/* background-color: #00001a; */
 	background-color: #000000;
 	padding-bottom: 20px;
+   width: 100%;
+   float: left;
 }
 
 .inner-left-container{
-	padding: 10px 20px;
-	width: 30%;
+	width: 40%;
+   float: left;
 }
 
 .inner-right-container{
-	padding: 10px 20px;
-	width: 70%;
+	padding-top: 55px;
+	width: 60%;
+   float: right;
 }
 
 .inner-left-container h3{

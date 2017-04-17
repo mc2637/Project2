@@ -106,7 +106,7 @@
 			</div>
 
 			<div class="inner-right-container">
-				<svg id ="moviePlot" height="600" weight="600"></svg>
+				<svg id ="moviePlot" height="600" width="600"></svg>
 			</div>
 
 		</div>
@@ -375,7 +375,7 @@
 		moviePlot.append("g").attr("transform", "translate(0,550)").call(xAxis);
 
 		var yAxis = d3.axisLeft(yScale);
-		moviePlot.append("g").attr("transform", "translate(50, 0").call(yAxis);
+		moviePlot.append("g").attr("transform", "translate(50, 0)").call(yAxis);
 
 
 
