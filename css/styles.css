@@ -32,8 +32,9 @@ h1.title{
 }
 
 .inner-left-container{
-	width: 40%;
+	width: 35%;
    float: left;
+   padding-left: 5%;
 }
 
 .inner-right-container{
