@@ -128,6 +128,8 @@
 
 	var selectedMovies = [];
 
+	var moviePlot = d3.select("#moviePlot");
+
 	//organize data
 	var parseRow1 = function(line){
 		return {
@@ -225,10 +227,10 @@
 			}
 		}
 
-		console.log("Year - "+yearSelected); 
-		console.log("Duration - "+durationSelected); 
-		console.log("Genre - "+genreSelectedValues) 
-		console.log("Factors - "+factorsSelected);
+		// console.log("Year - "+yearSelected); 
+		// console.log("Duration - "+durationSelected); 
+		// console.log("Genre - "+genreSelectedValues) 
+		// console.log("Factors - "+factorsSelected);
 
 		//selected year filter
 		if(yearSelected == "yearRange1"){
@@ -260,7 +262,18 @@
 		xFactor = factorsSelected[0];
 		yFactor = factorsSelected[1];
 
-		//create selectedMovie array according to new filter
+		var budgetMin=0;
+		var budgetMax=0;
+		var imdbScoreMin=0;
+		var imdbScoreMax=0;
+		var grossMin=0;
+		var grossMax=0;
+		var movieLikesMin=0;
+		var movieLikesMax=0;
+		var actorLikesMin=0;
+		var actorLikesMax=0;
+
+		//create selectedMovies array according to new filter
 		movieData.forEach(function(d){
 			//selected genre "all"
 			genreFilter = genreSelectedValues.includes("all");
@@ -268,19 +281,110 @@
 			for(var m=0; m<genreSelectedValues.length; m++){
 				if(!genreFilter){
 					genreFilter = d.genres.toUpperCase().trim().includes(genreSelectedValues[m].toUpperCase().trim());
-				}		
-			}
+				};	
+			};
 
 			if((d.year>=yearFilter1 && d.year<=yearFilter2) && d.duration<durationFilter && genreFilter){
+
 				selectedMovies.push(d);
-			}
+
+				if(budgetMin==0 || d.budget<budgetMin){budgetMin=d.budget};
+				if(budgetMax==0 || d.budget>budgetMax){budgetMax=d.budget};
+
+				if(imdbScoreMin==0 || d.score<imdbScoreMin){imdbScoreMin=d.score};
+				if(imdbScoreMax==0 || d.score>imdbScoreMax){imdbScoreMax=d.score};
+
+				if(grossMin==0 || d.gross<grossMin){grossMin=d.gross};
+				if(grossMax==0 || d.gross>grossMax){grossMax=d.gross};
+
+				if(movieLikesMin==0 || d.movieLikes<movieLikesMin){movieLikesMin=d.movieLikes};
+				if(movieLikesMax==0 || d.movieLikes>movieLikesMax){movieLikesMax=d.movieLikes};
+
+				if(actorLikesMin==0 || d.actorLikes<actorLikesMin){actorLikesMin=d.actorLikes};
+				if(actorLikesMax==0 || d.actorLikes>actorLikesMax){actorLikesMax=d.actorLikes};
+			};
 		});
 
-		console.log("year filter: "+ yearFilter1+ ", to "+yearFilter2);
-		console.log("duration filter: "+ durationFilter);
-		console.log("genre filter: " + genreFilter);
-		console.log("factor x: "+ xFactor);
-		console.log("factor y: "+ yFactor);
+		//create scatterplot
+		var xScale;
+		var yScale;
+		var circleAttributes;
+
+		var circles = moviePlot.selectAll("circle")
+						.data(selectedMovies)
+						.enter()
+						.append("circle")
+						.attr("r", 5)
+						.attr("fill", "steelBlue")
+						.style("opacity", 0.7);
+
+
+		if(xFactor == "budget"){
+			xScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([50,550]);
+			circleAttributes = circles
+				.attr("cx", function(d){return xScale(d.budget);});
+
+		} else if(xFactor == "imdbScore"){
+			xScale = d3.scaleLinear().domain([imdbScoreMin,imdbScoreMax]).range([50,550]);
+			circleAttributes = circles
+				.attr("cx", function(d){return xScale(d.score);});
+
+		}else if(xFactor == "gross"){
+			xScale = d3.scaleLinear().domain([grossMin,grossMax]).range([50,550]);
+			circleAttributes = circles
+				.attr("cx", function(d){return xScale(d.gross);});
+
+		}else if(xFactor == "movieLikes"){
+			xScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([50,550]);
+			circleAttributes = circles
+				.attr("cx", function(d){return xScale(d.movieLikes);});
+
+		}else if(xFactor == "actorLikes"){
+			xScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([50,550]);
+			circleAttributes = circles
+				.attr("cx", function(d){return xScale(d.actorLikes);});
+		};
+
+		if(yFactor == "budget"){
+			yScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([50,550]);
+			circleAttributes = circles
+				.attr("cy", function(d){return yScale(d.budget);});
+
+		} else if(yFactor == "imdbScore"){
+			yScale = d3.scaleLinear().domain([imdbScoreMin,imdbScoreMax]).range([50,550]);
+			circleAttributes = circles
+				.attr("cy", function(d){return yScale(d.score);});
+
+		}else if(yFactor == "gross"){
+			yScale = d3.scaleLinear().domain([grossMin,grossMax]).range([50,550]);
+			circleAttributes = circles
+				.attr("cy", function(d){return yScale(d.gross);});
+
+		}else if(yFactor == "movieLikes"){
+			yScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([50,550]);
+			circleAttributes = circles
+				.attr("cy", function(d){return yScale(d.movieLikes);});
+
+		}else if(yFactor == "actorLikes"){
+			yScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([50,550]);
+			circleAttributes = circles
+				.attr("cy", function(d){return yScale(d.actorLikes);});
+		};
+
+		var xAxis = d3.axisBottom(xScale);
+		moviePlot.append("g").attr("transform", "translate(0,550)").call(xAxis);
+
+		var yAxis = d3.axisLeft(yScale);
+		moviePlot.append("g").attr("transform", "translate(50, 0").call(yAxis);
+
+
+
+
+		// console.log("year filter: "+ yearFilter1+ ", to "+yearFilter2);
+		// console.log("duration filter: "+ durationFilter);
+		// console.log("genre filter: " + genreFilter);
+		// console.log("factor x: "+ xFactor);
+		// console.log("factor y: "+ yFactor);
 	}
 	
 
