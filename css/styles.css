@@ -10,7 +10,7 @@
 
 .movie-title-container{
 	background-color: #000066;
-	height: 100px;
+	height: 310px;
 	text-align: center;
 }
 
@@ -21,6 +21,13 @@ h1.title{
 	font-weight: lighter;
 	margin: 0;
 	padding-top: 20px;
+}
+
+p.intro{
+   color: #ffffff;
+   font-size: 24px;
+   padding-left: 20px;
+   padding-right: 20px;
 }
 
 .movie-visualization-container{

@@ -5,12 +5,13 @@
 <style>
 	html {padding: 0; margin: 0;}
 	body {font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif; margin: 0;}
-	svg {border: solid "black" 1px; }
+	svg {border: solid #fff 1px; }
 	.axisWhite line{
 		stroke: white;
 	}
 	.axisWhite path{
 		stroke: white;
+		stroke-width: 2pt;
 	}
 	.axisWhite text{
 		stroke: white;
@@ -31,6 +32,18 @@
 		<div class="movie-title-container">
 			
 			<h1 class="title">The most popular 21st century movies</h1>
+			<p class="intro">Hey! having allodoxaphobia, a.k.a cannot make up your mind.   Here's a little help to pick a movie that is just right for you!
+			<br> 
+			<br>
+			Instructions to the website:
+			<br>
+			1. Use our filters to eliminates movies you don't like
+			<br>
+			2. Choose 2 factors about the movie that matters the most to you
+			<br>
+			3. Hit "showMovie" and find out what to watch!
+			<br>
+			4. Refresh before you start a new search!</p>
 
 		</div>
 
@@ -115,7 +128,7 @@
 			</div>
 
 			<div class="inner-right-container">
-				<svg id ="moviePlot" height="800" width="800"></svg>
+				<svg id ="moviePlot" height="900" width="900"></svg>
 			</div>
 
 		</div>
@@ -320,27 +333,27 @@
 		circles.exit().remove();
 
 		if(xFactor == "budget"){
-			xScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([50,750]);
+			xScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([150,850]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.budget);});
 
 		} else if(xFactor == "imdbScore"){
-			xScale = d3.scaleLinear().domain([0,10]).range([50,750]);
+			xScale = d3.scaleLinear().domain([0,10]).range([150,850]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.score);});
 
 		}else if(xFactor == "gross"){
-			xScale = d3.scaleLinear().domain([grossMin,grossMax]).range([50,750]);
+			xScale = d3.scaleLinear().domain([grossMin,grossMax]).range([150,850]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.gross);});
 
 		}else if(xFactor == "movieLikes"){
-			xScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([50,750]);
+			xScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([150,850]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.movieLikes);});
 
 		}else if(xFactor == "actorLikes"){
-			xScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([50,750]);
+			xScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([150,850]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.actorLikes);});
 		};
@@ -375,13 +388,46 @@
 		moviePlot.append("g")
 			.attr("transform", "translate(0,750)")
 			.attr("class", "axisWhite")
-			.call(xAxis);
+			.call(xAxis)
+				.selectAll("text")  
+     			.style("text-anchor", "end")
+     			.attr("font-size", "10pt")
+     			.attr("dx", "-.8em")
+     			.attr("dy", ".15em")
+    			.attr("transform", "rotate(-65)");
 
 		var yAxis = d3.axisLeft(yScale);
 		moviePlot.append("g")
 			.attr("class", "axisWhite")
-			.attr("transform", "translate(50, 0)")
-			.call(yAxis);
+			.attr("transform", "translate(150, 0)")
+			.call(yAxis)
+				.selectAll("text")  
+     			.style("text-anchor", "end")
+     			.attr("font-size", "10pt")
+     			.attr("dx", "-.8em")
+     			.attr("dy", ".15em")
+    			.attr("transform", "rotate(-65)");;
+
+		//x-labels
+		moviePlot.append("text")
+			.attr("x", 450)
+			.attr("y", 870)
+			.text(xFactor)
+			.attr("fill", "white")
+			.attr("font-size", "18pt")
+			.attr("font-anchor", "middle");
+
+		//y-label
+		moviePlot.append("text")
+			.attr("x", 50)
+			.attr("y", 450)
+			.text(yFactor)
+			.attr('transform', 'rotate(-90 50 450)')
+			.attr("fill", "white")
+			.attr("font-size", "18pt")
+			.attr("font-anchor", "middle");
+
+
 	}
 	
 
