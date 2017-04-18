@@ -217,6 +217,7 @@
 
 
 	function showMovies(){
+		moviePlot.selectAll("*").remove();
 
 		// list of input variables for showMovies function
 		var year = document.getElementById("yearDropdown");
@@ -316,6 +317,19 @@
 				if(actorLikesMax==0 || d.actorLikes>actorLikesMax){actorLikesMax=d.actorLikes};
 			};
 		});
+
+		//if the movies got selected is noe enough to make a scatter plot
+		if(selectedMovies.length<3){
+			//moviePlot.selectAll("*").remove();
+			moviePlot.append("text")
+				.attr("x", 300)
+				.attr("y", 450)
+				.text("Sorry, No movie is found.")
+				.attr("fill", "white")
+				.attr("font-size", "18pt")
+				.attr("font-anchor", "middle");
+			return;
+		};
 
 		//create scatterplot
 		var xScale;
@@ -427,7 +441,7 @@
 			.attr("font-size", "18pt")
 			.attr("font-anchor", "middle");
 
-
+		console.log(selectedMovies);
 	}
 	
 
