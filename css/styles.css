@@ -2,7 +2,7 @@ html {padding: 0; margin: 0;}
 
 body {font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif; margin: 0;}
 
-svg {border: solid #fff 1px; }
+/* svg {border: solid #fff 1px; } */
 
 .axisWhite line{
    stroke: white;
@@ -145,6 +145,8 @@ color scale 2: dark blue - #000066, yellow - #F0D201, orange - #F6821F
 .chosen-choices{
    padding-top: 6px !important;
    font-size: 16px;
+   height: 40px !important;
+   overflow-y: auto !important;
 }
 
 .chosen-container .chosen-drop{
@@ -284,6 +286,24 @@ label.css-label {
 	-ms-user-select: none;
 	user-select: none;
 }
+
+/* tooltip styles */
+div.tooltip {  
+    position: absolute;       
+    text-align: center;       
+    width: 100px;              
+    height: auto;             
+    padding: 5px;          
+    font-size: 14px;    
+    background: white;  
+    border: 0px;     
+    border-radius: 4px;       
+}
+.movie-legend{
+   font-size: 12px;
+   font-style: italic;
+}
+/* tooltip styles */
 
 /* media queries */
 @media screen and (max-with: 900px and min-width: 300px){

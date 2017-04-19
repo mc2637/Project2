@@ -113,7 +113,9 @@
 			</div>
 
 			<div class="inner-right-container">
-				<p id="movieName"></p>
+				<!-- <div class="tooltip">Hover over me
+				  <span class="tooltiptext">Tooltip text</span>
+				</div> -->
 				<svg id ="moviePlot" height="700" width="700"></svg>
 			</div>
 
@@ -210,6 +212,17 @@
 			selectedMovies = [];
 		}
 
+		var tooltipexists = d3.select("div.tooltip");
+
+		if(tooltipexists != undefined){
+			tooltipexists.remove();
+		}
+
+		// Define the div for the tooltip
+		var tooltipdiv = d3.select("body").append("div")	
+		    .attr("class", "tooltip")				
+		    .style("opacity", 0);
+
 		// list of input variables for showMovies function
 		var year = document.getElementById("yearDropdown");
 		var yearSelected = year.options[year.selectedIndex].value;
@@ -220,7 +233,6 @@
 		var genre = document.getElementById("genreDropdown");
 		var genreSelectedArray = genre.selectedOptions;
 		var genreSelectedValues = [];
-		console.log("++++++++"+genreSelectedArray[0]);
 		var factorsArray = document.getElementsByClassName("css-checkbox");
 		var factorsSelected = [];
 
@@ -337,7 +349,12 @@
 						.attr("fill", "#F0D201")
 						.style("opacity", 0.7)
 						.on("mouseover", function (d) {
-							d3.select("#movieName").text(d.title);
+							tooltipdiv.transition()		
+				                .duration(200)		
+				                .style("opacity", .9);		
+				            tooltipdiv.html("<strong>" + d.title + "</strong>" + "<br/><div class='movie-legend'>"  + d.year + ", " + d.duration+" minutes" + "</div>" + "<a href="+d.link+" target='_blank'>IMDB link</a>")	
+				                .style("left", (d3.event.pageX + 10) + "px")		
+				                .style("top", (d3.event.pageY - 28) + "px");
 						});
 
 		if(xFactor == "budget"){
@@ -443,6 +460,7 @@
 <!-- References: 
 select dropdown styling: https://codepen.io/ericrasch/pen/zjDBx
 checkbox styling: http://www.csscheckbox.com/checkbox/42432/padded-orange-check/
+d3 tooltip: http://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 -->
 </body>
 
