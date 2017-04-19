@@ -217,6 +217,12 @@
 
 
 	function showMovies(){
+		moviePlot.selectAll("*").remove();
+		if(selectedMovies.length>0){
+			selectedMovies = [];
+			console.log("selecte Movies: "+ selectedMovies);
+			//moviePlot.selectAll("*").remove();
+		}
 
 		// list of input variables for showMovies function
 		var year = document.getElementById("yearDropdown");
@@ -319,7 +325,7 @@
 
 		//if the movies got selected is noe enough to make a scatter plot
 		if(selectedMovies.length<3){
-			moviePlot.selectAll("*").remove();
+			//moviePlot.selectAll("*").remove();
 			moviePlot.append("text")
 				.attr("x", 300)
 				.attr("y", 450)
@@ -336,13 +342,11 @@
 		var circleAttributes;
 
 		var circles = moviePlot.selectAll("circle")
-						.data(selectedMovies);
-		circles.exit().remove();
-
-		circles.enter().append("circle").attr("r", 10)
-			.merge(circles)
-			.attr("fill", "#F6821F")
-			.style("opacity", 0.7);
+						.data(selectedMovies)
+						.enter()
+						.append("circle").attr("r", 10)
+						.attr("fill", "#F6821F")
+						.style("opacity", 0.7);
 
 		if(xFactor == "budget"){
 			xScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([150,850]);
