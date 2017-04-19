@@ -2,21 +2,6 @@
 
 <head>
 <title>Project 2 - INFO 5100 - Data-driven Web Pages</title>
-<style>
-	html {padding: 0; margin: 0;}
-	body {font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif; margin: 0;}
-	svg {border: solid #fff 1px; }
-	.axisWhite line{
-		stroke: white;
-	}
-	.axisWhite path{
-		stroke: white;
-		stroke-width: 2pt;
-	}
-	.axisWhite text{
-		stroke: white;
-	}
-</style>
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oleo+Script" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -32,18 +17,17 @@
 		<div class="movie-title-container">
 			
 			<h1 class="title">The most popular 21st century movies</h1>
-			<p class="intro">Hey! having allodoxaphobia, a.k.a cannot make up your mind.   Here's a little help to pick a movie that is just right for you!
-			<br> 
-			<br>
+			<p class="intro">Hey! having allodoxaphobia, a.k.a cannot make up your mind? Here's a little help to pick a movie that is just right for you!
+			<p class="intro">
 			Instructions to the website:
-			<br>
-			1. Use our filters to eliminates movies you don't like
-			<br>
-			2. Choose 2 factors about the movie that matters the most to you
-			<br>
-			3. Hit "showMovie" and find out what to watch!
-			<br>
-			4. Refresh before you start a new search!</p>
+			</p>
+			<ol>
+				<li>1. Use our filters to eliminates movies you don't like</li>
+				<li>2. Choose 2 factors about the movie that matters the most to you</li>
+				<li>3. Hit "showMovie" and find out what to watch!</li>
+				<li>4. Refresh before you start a new search!</li>
+			</ol>
+			</p>
 
 		</div>
 
@@ -346,7 +330,7 @@
 						.data(selectedMovies)
 						.enter()
 						.append("circle").attr("r", 10)
-						.attr("fill", "#F6821F")
+						.attr("fill", "#F0D201")
 						.style("opacity", 0.7);
 
 		if(xFactor == "budget"){
