@@ -128,7 +128,7 @@
 			</div>
 
 			<div class="inner-right-container">
-				<svg id ="moviePlot" height="900" width="900"></svg>
+				<svg id ="moviePlot" height="700" width="700"></svg>
 			</div>
 
 		</div>
@@ -328,8 +328,8 @@
 		//if the movies got selected is noe enough to make a scatter plot
 		if(selectedMovies.length<3){
 			moviePlot.append("text")
-				.attr("x", 300)
-				.attr("y", 450)
+				.attr("x", 200)
+				.attr("y", 350)
 				.text("Sorry, No movie is found.")
 				.attr("fill", "white")
 				.attr("font-size", "18pt")
@@ -350,60 +350,60 @@
 						.style("opacity", 0.7);
 
 		if(xFactor == "budget"){
-			xScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([150,850]);
+			xScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([100,650]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.budget);});
 
 		} else if(xFactor == "imdbScore"){
-			xScale = d3.scaleLinear().domain([0,10]).range([150,850]);
+			xScale = d3.scaleLinear().domain([0,10]).range([100,650]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.score);});
 
 		}else if(xFactor == "gross"){
-			xScale = d3.scaleLinear().domain([grossMin,grossMax]).range([150,850]);
+			xScale = d3.scaleLinear().domain([grossMin,grossMax]).range([100,650]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.gross);});
 
 		}else if(xFactor == "movieLikes"){
-			xScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([150,850]);
+			xScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([100,650]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.movieLikes);});
 
 		}else if(xFactor == "actorLikes"){
-			xScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([150,850]);
+			xScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([100,650]);
 			circleAttributes = circles
 				.attr("cx", function(d){return xScale(d.actorLikes);});
 		};
 
 		if(yFactor == "budget"){
-			yScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([750,50]);
+			yScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([550,50]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.budget);});
 
 		} else if(yFactor == "imdbScore"){
-			yScale = d3.scaleLinear().domain([0,10]).range([750,50]);
+			yScale = d3.scaleLinear().domain([0,10]).range([550,50]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.score);});
 
 		}else if(yFactor == "gross"){
-			yScale = d3.scaleLinear().domain([grossMin,grossMax]).range([750,50]);
+			yScale = d3.scaleLinear().domain([grossMin,grossMax]).range([550,50]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.gross);});
 
 		}else if(yFactor == "movieLikes"){
-			yScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([750,50]);
+			yScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([550,50]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.movieLikes);});
 
 		}else if(yFactor == "actorLikes"){
-			yScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([750,50]);
+			yScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([550,50]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.actorLikes);});
 		};
 
 		var xAxis = d3.axisBottom(xScale);
 		moviePlot.append("g")
-			.attr("transform", "translate(0,750)")
+			.attr("transform", "translate(0,550)")
 			.attr("class", "axisWhite")
 			.call(xAxis)
 				.selectAll("text")  
@@ -416,7 +416,7 @@
 		var yAxis = d3.axisLeft(yScale);
 		moviePlot.append("g")
 			.attr("class", "axisWhite")
-			.attr("transform", "translate(150, 0)")
+			.attr("transform", "translate(100, 0)")
 			.call(yAxis)
 				.selectAll("text")  
      			.style("text-anchor", "end")
@@ -427,8 +427,8 @@
 
 		//x-labels
 		moviePlot.append("text")
-			.attr("x", 450)
-			.attr("y", 870)
+			.attr("x", 350)
+			.attr("y", 670)
 			.text(xFactor)
 			.attr("fill", "white")
 			.attr("font-size", "18pt")
@@ -436,10 +436,10 @@
 
 		//y-label
 		moviePlot.append("text")
-			.attr("x", 50)
-			.attr("y", 450)
+			.attr("x", 30)
+			.attr("y", 350)
 			.text(yFactor)
-			.attr('transform', 'rotate(-90 50 450)')
+			.attr('transform', 'rotate(-90 30 350)')
 			.attr("fill", "white")
 			.attr("font-size", "18pt")
 			.attr("font-anchor", "middle");
