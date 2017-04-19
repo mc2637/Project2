@@ -220,8 +220,6 @@
 		moviePlot.selectAll("*").remove();
 		if(selectedMovies.length>0){
 			selectedMovies = [];
-			console.log("selecte Movies: "+ selectedMovies);
-			//moviePlot.selectAll("*").remove();
 		}
 
 		// list of input variables for showMovies function
@@ -282,8 +280,12 @@
 
 
 		//selected factors
-		xFactor = factorsSelected[0];
-		yFactor = factorsSelected[1];
+		if(factorsSelected[0]==null){factorsSelected[0]="budget"; xFactor = "budget";}
+		else {xFactor = factorsSelected[0];}
+
+		if(factorsSelected[0] == "budget" && factorsSelected[1] == null){yFactor = "gross";}
+		else if(factorsSelected[0] != "budget" &&factorsSelected[1] == null){yFactor = "budget";}
+		else {yFactor = factorsSelected[1];}
 
 		var budgetMin=0;
 		var budgetMax=0;
@@ -325,7 +327,6 @@
 
 		//if the movies got selected is noe enough to make a scatter plot
 		if(selectedMovies.length<3){
-			//moviePlot.selectAll("*").remove();
 			moviePlot.append("text")
 				.attr("x", 300)
 				.attr("y", 450)
