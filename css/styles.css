@@ -33,6 +33,7 @@ ol li{
     background-image: url(../images/cinema.jpg);
     background-size: cover;
     background-position: 0px -300px;
+    background-repeat: no-repeat;
 }
 
 .movie-title-container{
@@ -52,7 +53,7 @@ h1.title{
 
 p.intro{
    color: #ffffff;
-   font-size: 18px;
+   font-size: 20px;
    padding-left: 20px;
    padding-right: 20px;
 }
@@ -115,11 +116,47 @@ button:hover, button:focus{
 
 button.view-graph-btn{
 	margin-top: 30px;
+   height: 80px;
+}
+
+p#movieName{
+   color: #ffffff;
+   margin-top: 0;
 }
 
 /* color scale 1:; blue - #1E409A, reddish - #EE3F3C, light green - #70BE44 
 color scale 2: dark blue - #000066, yellow - #F0D201, orange - #F6821F
 */
+
+/* chosen multiselect dropdown styles */
+
+.chosen-container{
+   width: 234px !important;
+}
+
+.chosen-container-multi, .chosen-choices{
+   background-image: none !important;
+   background-color: #F6821F !important;
+   border: none !important;
+   height: 40px;
+   padding-left: 6px;
+}
+
+.chosen-choices{
+   padding-top: 6px !important;
+   font-size: 16px;
+}
+
+.chosen-container .chosen-drop{
+   left: 0;
+   background-color: #F6821F;
+   font-size: 16px;
+}
+
+.chosen-container-multi .chosen-choices li.search-field input[type="text"]{
+   color: #ffffff;
+}
+/* chosen multiselect dropdown styles */
 
 /* select dropdown styles */
 .styled-select {
@@ -131,7 +168,7 @@ color scale 2: dark blue - #000066, yellow - #F0D201, orange - #F6821F
 }
 
 .styled-select#genreSelect, .styled-select#genreSelect select{
-   height: 300px;
+   /* height: 40px; */
 }
 
 .styled-select select {
@@ -246,4 +283,12 @@ label.css-label {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+/* media queries */
+@media screen and (max-with: 900px and min-width: 300px){
+   .movie-banner-container{
+      height: 100%;
+      background-position: 0px 60%;
+   }
 }
