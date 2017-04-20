@@ -1,7 +1,7 @@
 INFO 5100 Project 2 - Interactive Data Visualization
 
 Project Topic: Movie Recommendations!
-Group Members: Ming Cheng, Nurpur Kale, Suganya Sankaran
+Group Members: Ming Cheng, Nupur Kale, Suganya Sankaran
 
 The Story about Our Visualization:
 “What movie to watch?” is such an important question that will directly affect the quality of your relaxing Saturday night and if you are one of those “who-cannot-make-up-your-mind” people, picking a movie can be a nightmare. And most importantly, movie preferences are personal. It’s more than what year it is published or which genre it belongs too. People care about more factors than the usual google results. We want to know how the movies are rated considering both box office success and the popularity of the lead actors.
