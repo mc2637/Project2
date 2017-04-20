@@ -372,21 +372,21 @@
 		var gradient = moviePlot.append("defs")
   						.append("linearGradient")
     					.attr("id", "gradient")
-    					.attr("x1", "0%")
-    					.attr("y1", "100%")
-    					.attr("x2", "100%")
-    					.attr("y2", "0%")
+    					.attr("x1", "50%")
+    					.attr("y1", "50%")
+    					.attr("x2", "110%")
+    					.attr("y2", "-10%")
     					.attr("spreadMethod", "pad");
 
 		gradient.append("stop")
     		.attr("offset", "0%")
-    		.attr("stop-color", "#ABB2B9")
+    		.attr("stop-color", "#000000")
     		.attr("stop-opacity", 1);
 
 		gradient.append("stop")
    			.attr("offset", "100%")
-    		.attr("stop-color", "#17202A")
-    		.attr("stop-opacity", 1);
+    		.attr("stop-color", "red")
+    		.attr("stop-opacity", 0.5);
 
 		moviePlot.append("rect")
     		.attr("width", 700)
@@ -501,7 +501,7 @@
 
 		//y-label
 		moviePlot.append("text")
-			.attr("x", 50)
+			.attr("x", 25)
 			.attr("y", 350)
 			.text(yFactor)
 			//.attr('transform', 'rotate(-90 50 350)')
