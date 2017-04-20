@@ -538,9 +538,7 @@ input:checked + .slider:before {
 
 #oscarSwitchContainer{
    display: none;
-   position: relative;
-   right: 100px;
-   float: right;
+   text-align: center;
 }
 /* slider styles */
 
