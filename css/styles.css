@@ -4,11 +4,11 @@ html {padding: 0; margin: 0;}
 
 /*title animation code*/
 /* Animation properties */
-.star {
-  animation: star 10s ease-out infinite;
+.movie {
+  animation: movie 10s ease-out infinite;
 }
-.wars {
-  animation: wars 10s ease-out infinite;
+.night {
+  animation: night 10s ease-out infinite;
 }
 .byline span {
   animation: spin-letters 10s linear infinite;
@@ -18,7 +18,7 @@ html {padding: 0; margin: 0;}
 }
 
 /* Keyframes */
-@keyframes star {
+@keyframes movie {
   0% {
     opacity: 0;
     transform: scale(1.5) translateY(-0.75em);
@@ -36,7 +36,7 @@ html {padding: 0; margin: 0;}
   }
 }
 
-@keyframes wars {
+@keyframes night {
   0% {
     opacity: 0;
     transform: scale(1.5) translateY(0.5em);
@@ -81,7 +81,7 @@ html {padding: 0; margin: 0;}
 }
 
 /* Make the 3D work on the container */
-.starwars-demo {
+.movienight-demo {
   perspective: 800px;
   transform-style: preserve3d;
 }
@@ -89,9 +89,10 @@ html {padding: 0; margin: 0;}
 /* General styles and layout */
 body {
   background: #000 url(//cssanimation.rocks/demo/starwars/images/bg.jpg);
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 
-.starwars-demo {
+.movienight-demo {
   height: 17em;
   left: 50%;
   position: absolute;
@@ -108,16 +109,16 @@ img {
   width: 100%;
 }
 
-.star, .wars, .byline {
+.movie, .night, .byline {
   position: absolute;
 }
 
-.star {
+.movie {
   top: -0.75em;
   height: 45%;
 }
 
-.wars {
+.night {
   bottom: -0.5em;
   height: 45%;
 }
@@ -137,13 +138,13 @@ img {
 /*** Media queries for adjusting to different screen sizes ***/
 
 @media only screen and (max-width: 600px) {
-  .starwars-demo {
+  .movienight-demo {
     font-size: 10px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .starwars-demo {
+  .movienight-demo {
     font-size: 7px;
   }
 }
@@ -437,10 +438,10 @@ label.css-label {
 div.tooltip {  
     position: absolute;       
     text-align: center;       
-    width: 150px;              
+    width: 400px;              
     height: auto;             
     padding: 4px;          
-    font-size: 14px;    
+    font-size: 24px;    
     background: white;  
     border: 0px;     
     border-radius: 4px; 
@@ -455,6 +456,7 @@ div.tooltip strong{
 
 div.tooltip a{
    color: #F6821F;
+   font-size: 18px;
 }
 
 div.tooltip a:hover, div.tooltip a:focus{
@@ -462,10 +464,85 @@ div.tooltip a:hover, div.tooltip a:focus{
 }
 
 .movie-legend{
-   font-size: 12px;
+   font-size: 18px;
    font-style: italic;
+   margin-bottom: 3px;
 }
 /* tooltip styles */
+
+/* slider styles */
+/* The switch - the box around the slider */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 10px;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #F6821F;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #F6821F;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.switch-label{
+   color: #ffffff;
+   font-size: 18px;
+}
+
+#oscarSwitchContainer{
+   display: none;
+   position: relative;
+   right: 100px;
+   float: right;
+}
+/* slider styles */
 
 /* media queries */
 @media screen and (max-with: 900px and min-width: 300px){

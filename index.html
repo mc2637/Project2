@@ -13,9 +13,9 @@
 	<div class="movie-main-container">
 
 		<div class="movie-banner-container">
-			<div class="starwars-demo">
-    			<img src="../images/movie.png" alt="Star" class="star">
-    			<img src="../images/night.png" alt="Wars" class="wars">
+			<div class="movienight-demo">
+    			<img src="../images/movie.png" alt="Movie" class="movie">
+    			<img src="../images/night.png" alt="Night" class="night">
    		
    				 <h2 class="byline" id="byline">The Force Awakens</h2>
  			</div>
@@ -50,6 +50,16 @@
 		</div>
 
 		<div class="movie-visualization-container">
+			<!-- Rounded switch -->
+			<span id="oscarSwitchContainer">
+				
+				<label class="switch">
+				  <input type="checkbox" id="oscarSwitch" onchange="showMovies()">
+				  <div class="slider round"></div>
+				</label>
+				<label for="oscarSwitch" class="switch-label">Only Oscar nominated movies</label>
+
+			</span>
 
 			<div class="inner-left-container">
 				
@@ -128,11 +138,9 @@
 			</div>
 
 			<div class="inner-right-container">
-				<!-- <div class="tooltip">Hover over me
-				  <span class="tooltiptext">Tooltip text</span>
-				</div> -->
-				<svg id ="moviePlot" height="700" width="700"></svg>
 				
+				<svg id ="moviePlot" height="700" width="700"></svg>
+			
 			</div>
 
 		</div>
@@ -238,10 +246,14 @@
 
 
 	function showMovies(){
+		var oscarFilter = document.getElementById('oscarSwitch').checked;
+		
 		moviePlot.selectAll("*").remove();
 		if(selectedMovies.length>0){
 			selectedMovies = [];
 		}
+
+		document.getElementById("oscarSwitchContainer").style.display = "block";
 
 		var tooltipexists = d3.select("div.tooltip");
 
@@ -339,8 +351,13 @@
 			};
 
 			if((d.year>=yearFilter1 && d.year<=yearFilter2) && d.duration<durationFilter && genreFilter){
-
-				selectedMovies.push(d);
+				if(oscarFilter == true){
+					if(d.award != undefined){
+						selectedMovies.push(d);
+					}
+				} else{
+					selectedMovies.push(d);
+				}
 
 				if(budgetMin==0 || d.budget<budgetMin){budgetMin=d.budget};
 				if(budgetMax==0 || d.budget>budgetMax){budgetMax=d.budget};
@@ -412,11 +429,12 @@
 							} else{
 								award = "Oscar Nomination(s): "+ d.award.split('|').join(', ');
 							}
+							var keywords = d.keywords.split('|').join(', ');
 							tooltipdiv.transition()		
 				                .duration(200)		
 				                .style("opacity", 1);		
-				            tooltipdiv.html("<strong>" + d.title + "</strong><div class='movie-legend'>" + award + "</div><div class='movie-legend'>"  + d.year + ", " + d.duration+" minutes" + "</div>" + "<a href="+d.link+" target='_blank'>IMDB link</a>")	
-				                .style("left", (d3.event.pageX + 10) + "px")		
+				            tooltipdiv.html("<strong>" + d.title + "</strong><div class='movie-legend'>" + award + "</div><div class='movie-legend'>"  + d.year + ", " + d.duration+" minutes" + "</div><div class='movie-legend'>" + "Keywords: " +keywords + "</div><a href="+d.link+" target='_blank'>IMDB link</a>")	
+				                .style("left", (d3.event.pageX - 420) + "px")		
 				                .style("top", (d3.event.pageY - 28) + "px");
 						});
 
@@ -472,24 +490,6 @@
 				.attr("cy", function(d){return yScale(d.actorLikes);});
 		};
 
-		//xAxis
-		// moviePlot.append("svg:image")
-		// 	.attr("x", 100)
-		// 	.attr("y", 579)
-		// 	.attr("width", 550)
-		// 	.attr("height", 50)
-		// 	.attr("xlink:href","../images/xaxis.png");
-
-		// //yAxis
-		// moviePlot.append("svg:image")
-		// 	.attr("x", 100)
-		// 	.attr("y", 580)
-		// 	.attr("width", 550)
-		// 	.attr("height", 50)
-		// 	.attr("xlink:href","../images/xaxis.png")
-		// 	.attr("transform", "rotate(-90, 100, 604)");
-
-
 		//x-labels
 		moviePlot.append("text")
 			.attr("x", 350)
@@ -501,23 +501,24 @@
 
 		//y-label
 		moviePlot.append("text")
-			.attr("x", 25)
-			.attr("y", 350)
+			.attr("x", -220)
+			.attr("y", 30)
 			.text(yFactor)
 			.attr("fill", "white")
 			.attr("font-size", "24pt")
-			.attr("font-anchor", "middle");
+			.attr("font-anchor", "middle")
+			.attr("transform", "rotate(-90)");
 
 		//indicators
 		moviePlot.append("text")
-			.attr("x", 500)
+			.attr("x", 450)
 			.attr("y", 40)
 			.text("Most Recommended")
 			.attr("fill", "white")
 			.attr("font-size", "16pt")
 			.attr("font-anchor", "middle");
 		moviePlot.append("text")
-			.attr("x", 495)
+			.attr("x", 450)
 			.attr("y", 60)
 			.text("(under orange shadow)")
 			.attr("fill", "white")
