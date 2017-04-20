@@ -7,7 +7,6 @@
 <link rel="stylesheet" type="text/css" href="css/chosen.css">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<
 </head>
 
 <body>
@@ -158,6 +157,21 @@
 	var moviePlot = d3.select("#moviePlot");
 
 	var selectedMovies = [];
+
+	//initial svg display
+	moviePlot.append("svg:image")
+		.attr("x", 0)
+		.attr("y", 0)
+		.attr("width", 700)
+		.attr("height", 700)
+		.attr("xlink:href","../images/popcorn.png");
+	moviePlot.append("text")
+				.attr("x", 100)
+				.attr("y", 100)
+				.text("What's to Wait For? Let's Find Movies!")
+				.attr("fill", "white")
+				.attr("font-size", "22pt")
+				.attr("font-anchor", "middle");
 
 	//organize data
 	var parseRow1 = function(line){
