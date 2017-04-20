@@ -13,7 +13,7 @@
 
 	<div class="movie-main-container">
 
-		<div class="movie-banner-container"></div>
+		<!-- <div class="movie-banner-container"></div> -->
 
 		<div class="movie-title-container">
 			
@@ -341,6 +341,7 @@
 		var xScale;
 		var yScale;
 		var circleAttributes;
+		var award;
 
 		var circles = moviePlot.selectAll("circle")
 						.data(selectedMovies)
@@ -349,10 +350,15 @@
 						.attr("fill", "#F0D201")
 						.style("opacity", 0.7)
 						.on("mouseover", function (d) {
+							if(d.award == undefined){
+								award = '';
+							} else{
+								award = "Oscar Nomination(s): "+ d.award.split('|').join(', ');
+							}
 							tooltipdiv.transition()		
 				                .duration(200)		
-				                .style("opacity", .9);		
-				            tooltipdiv.html("<strong>" + d.title + "</strong>" + "<br/><div class='movie-legend'>"  + d.year + ", " + d.duration+" minutes" + "</div>" + "<a href="+d.link+" target='_blank'>IMDB link</a>")	
+				                .style("opacity", 1);		
+				            tooltipdiv.html("<strong>" + d.title + "</strong><div class='movie-legend'>" + award + "</div><div class='movie-legend'>"  + d.year + ", " + d.duration+" minutes" + "</div>" + "<a href="+d.link+" target='_blank'>IMDB link</a>")	
 				                .style("left", (d3.event.pageX + 10) + "px")		
 				                .style("top", (d3.event.pageY - 28) + "px");
 						});
