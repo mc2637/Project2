@@ -368,6 +368,32 @@
 			return;
 		};
 
+		//svg background
+		var gradient = moviePlot.append("defs")
+  						.append("linearGradient")
+    					.attr("id", "gradient")
+    					.attr("x1", "0%")
+    					.attr("y1", "100%")
+    					.attr("x2", "100%")
+    					.attr("y2", "0%")
+    					.attr("spreadMethod", "pad");
+
+		gradient.append("stop")
+    		.attr("offset", "0%")
+    		.attr("stop-color", "#ABB2B9")
+    		.attr("stop-opacity", 1);
+
+		gradient.append("stop")
+   			.attr("offset", "100%")
+    		.attr("stop-color", "#17202A")
+    		.attr("stop-opacity", 1);
+
+		moviePlot.append("rect")
+    		.attr("width", 700)
+    		.attr("height", 700)
+    		.style("fill", "url(#gradient)");
+
+
 		//create scatterplot
 		var xScale;
 		var yScale;
@@ -421,75 +447,84 @@
 		};
 
 		if(yFactor == "budget"){
-			yScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([550,50]);
+			yScale = d3.scaleLinear().domain([budgetMin,budgetMax]).range([600,100]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.budget);});
 
 		} else if(yFactor == "imdbScore"){
-			yScale = d3.scaleLinear().domain([0,10]).range([550,50]);
+			yScale = d3.scaleLinear().domain([0,10]).range([600,100]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.score);});
 
 		}else if(yFactor == "gross"){
-			yScale = d3.scaleLinear().domain([grossMin,grossMax]).range([550,50]);
+			yScale = d3.scaleLinear().domain([grossMin,grossMax]).range([600,100]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.gross);});
 
 		}else if(yFactor == "movieLikes"){
-			yScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([550,50]);
+			yScale = d3.scaleLinear().domain([movieLikesMin,movieLikesMax]).range([600,100]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.movieLikes);});
 
 		}else if(yFactor == "actorLikes"){
-			yScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([550,50]);
+			yScale = d3.scaleLinear().domain([actorLikesMin,actorLikesMax]).range([600,100]);
 			circleAttributes = circles
 				.attr("cy", function(d){return yScale(d.actorLikes);});
 		};
 
-		var xAxis = d3.axisBottom(xScale);
-		moviePlot.append("g")
-			.attr("transform", "translate(0,550)")
-			.attr("class", "axisWhite")
-			.call(xAxis)
-				.selectAll("text")  
-     			.style("text-anchor", "end")
-     			.attr("font-size", "10pt")
-     			.attr("dx", "-.8em")
-     			.attr("dy", ".15em")
-    			.attr("transform", "rotate(-65)");
+		//xAxis
+		moviePlot.append("svg:image")
+			.attr("x", 100)
+			.attr("y", 579)
+			.attr("width", 550)
+			.attr("height", 50)
+			.attr("xlink:href","../images/xaxis.png");
 
-		var yAxis = d3.axisLeft(yScale);
-		moviePlot.append("g")
-			.attr("class", "axisWhite")
-			.attr("transform", "translate(100, 0)")
-			.call(yAxis)
-				.selectAll("text")  
-     			.style("text-anchor", "end")
-     			.attr("font-size", "10pt")
-     			.attr("dx", "-.8em")
-     			.attr("dy", ".15em")
-    			.attr("transform", "rotate(-65)");;
+		//yAxis
+		moviePlot.append("svg:image")
+			.attr("x", 100)
+			.attr("y", 580)
+			.attr("width", 550)
+			.attr("height", 50)
+			.attr("xlink:href","../images/xaxis.png")
+			.attr("transform", "rotate(-90, 100, 604)");
+
 
 		//x-labels
 		moviePlot.append("text")
 			.attr("x", 350)
-			.attr("y", 670)
+			.attr("y", 650)
 			.text(xFactor)
 			.attr("fill", "white")
-			.attr("font-size", "18pt")
+			.attr("font-size", "24pt")
 			.attr("font-anchor", "middle");
 
 		//y-label
 		moviePlot.append("text")
-			.attr("x", 30)
+			.attr("x", 50)
 			.attr("y", 350)
 			.text(yFactor)
-			.attr('transform', 'rotate(-90 30 350)')
+			.attr('transform', 'rotate(-90 50 350)')
 			.attr("fill", "white")
-			.attr("font-size", "18pt")
+			.attr("font-size", "24pt")
 			.attr("font-anchor", "middle");
 
-		console.log(selectedMovies);
+		//indicators
+		moviePlot.append("text")
+			.attr("x", 500)
+			.attr("y", 40)
+			.text("Most Recommended")
+			.attr("fill", "white")
+			.attr("font-size", "16pt")
+			.attr("font-anchor", "middle");
+
+		moviePlot.append("text")
+			.attr("x", 20)
+			.attr("y", 650)
+			.text("Least Recommended")
+			.attr("fill", "white")
+			.attr("font-size", "16pt")
+			.attr("font-anchor", "middle");
 	}
 	
 
