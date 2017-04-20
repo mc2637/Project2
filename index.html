@@ -386,7 +386,7 @@
 		gradient.append("stop")
    			.attr("offset", "100%")
     		.attr("stop-color", "#F6821F")
-    		.attr("stop-opacity", 0.5);
+    		.attr("stop-opacity", 1);
 
 		moviePlot.append("rect")
     		.attr("width", 700)
@@ -403,7 +403,7 @@
 		var circles = moviePlot.selectAll("circle")
 						.data(selectedMovies)
 						.enter()
-						.append("circle").attr("r", 10)
+						.append("circle").attr("r", 8)
 						.attr("fill", "#F0D201")
 						.style("opacity", 0.8)
 						.on("mouseover", function (d) {
@@ -517,7 +517,7 @@
 			.attr("font-size", "16pt")
 			.attr("font-anchor", "middle");
 		moviePlot.append("text")
-			.attr("x", 495)
+			.attr("x", 490)
 			.attr("y", 60)
 			.text("(under orange shadow)")
 			.attr("fill", "white")
@@ -539,6 +539,7 @@
 select dropdown styling: https://codepen.io/ericrasch/pen/zjDBx
 checkbox styling: http://www.csscheckbox.com/checkbox/42432/padded-orange-check/
 d3 tooltip: http://bl.ocks.org/d3noob/a22c42db65eb00d4e369
+title animation: https://cssanimation.rocks/starwars/
 -->
 </body>
 
