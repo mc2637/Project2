@@ -7,29 +7,78 @@
 <link rel="stylesheet" type="text/css" href="css/chosen.css">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <script src="https://d3js.org/d3.v4.min.js"></script>
+<
 </head>
 
 <body>
+	<!-- <div class="movie-main-container">
+		<div class="starwars-demo">
+    		<img src="//cssanimation.rocks/demo/starwars/images/star.svg" alt="Star" class="star">
+    		<img src="//cssanimation.rocks/demo/starwars/images/wars.svg" alt="Wars" class="wars">
+   		
+   			 <h2 class="byline" id="byline">The Force Awakens</h2>
+ 		</div>
+ 	
+ 	<script type="text/javascript">
+ 		var byline = document.getElementById('byline'); 
+		bylineText = byline.innerHTML;		
+		bylineArr = bylineText.split('');	
+		byline.innerHTML = '';					
+
+		var span;	
+		var letter;
+
+		for(i=0;i<bylineArr.length;i++){
+  			span = document.createElement("span");
+  			letter = document.createTextNode(bylineArr[i]);
+  			if(bylineArr[i] == ' ') {						
+    			byline.appendChild(letter);	
+  			} else {
+				span.appendChild(letter);
+  				byline.appendChild(span); 
+  			}
+		}
+ 	</script>
+ 	
+ 	</div> -->
 
 	<div class="movie-main-container">
 
-		<div class="movie-banner-container"></div>
+		<div class="movie-banner-container">
+			<div class="starwars-demo">
+    			<img src="../images/movie.png" alt="Star" class="star">
+    			<img src="../images/night.png" alt="Wars" class="wars">
+   		
+   				 <h2 class="byline" id="byline">The Force Awakens</h2>
+ 			</div>
+ 	
+ 			<script type="text/javascript">
+ 				var byline = document.getElementById('byline'); 
+				bylineText = byline.innerHTML;		
+				bylineArr = bylineText.split('');	
+				byline.innerHTML = '';					
+
+				var span;	
+				var letter;
+
+				for(i=0;i<bylineArr.length;i++){
+  					span = document.createElement("span");
+  					letter = document.createTextNode(bylineArr[i]);
+  					if(bylineArr[i] == ' ') {						
+    					byline.appendChild(letter);	
+  					} else {
+						span.appendChild(letter);
+  						byline.appendChild(span); 
+  					}
+				}
+ 			</script>
+		</div>
 
 		<div class="movie-title-container">
 			
 			<h1 class="title">Which movie can you watch next?</h1>
 			<p class="intro">Hey! Having allodoxaphobia, a.k.a cannot make up your mind? Here's a little help to pick a movie that is just right for you!
-			<p class="intro">
-			Instructions to the website:
-			</p>
-			<ol>
-				<li>1. Use our filters to eliminates movies you don't like</li>
-				<li>2. Choose 2 factors about the movie that matters the most to you</li>
-				<li>3. Hit "showMovie" and find out what to watch!</li>
-				<!-- <li>4. Refresh before you start a new search!</li> -->
-			</ol>
-			</p>
-
+			
 		</div>
 
 		<div class="movie-visualization-container">
@@ -78,8 +127,6 @@
 					<option value="crime">Genre - Crime</option>
 					<option value="war">Genre - War</option>
 					<option value="biography">Genre - Biography</option>
-					<option value="film-noir">Genre - Film-Noir</option>
-					<option value="short">Genre - Short</option>
 				  </select>
 				</div>
 
@@ -117,6 +164,7 @@
 				  <span class="tooltiptext">Tooltip text</span>
 				</div> -->
 				<svg id ="moviePlot" height="700" width="700"></svg>
+				
 			</div>
 
 		</div>
