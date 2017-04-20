@@ -5,9 +5,9 @@ Group Members: Ming Cheng, Nurpur Kale, Suganya Sankaran
 
 The Story about Our Visualization:
 Our project is aimed to help people who can't make up their minds about which movie to watch on a Saturday Movie Night to quickly and accurately find movies that may be best interests to them and their friends. 
-“What movie to watch?” is such an important question that will directly affect the quality of your relaxing Saturday night and if you are one of those “who cannot make up your mind” people, picking a movie can be a nightmare. And most importantly, movie preferences are personal. It’s more than what year it published or which genre it belongs too. People care about more factors than the usual rating of the google results. We want to know how the movies are rated considering both box office success and the popularity of the lead actors.
+“What movie to watch?” is such an important question that will directly affect the quality of your relaxing Saturday night and if you are one of those “who-cannot-make-up-your-mind” people, picking a movie can be a nightmare. And most importantly, movie preferences are personal. It’s more than what year it is published or which genre it belongs too. People care about more factors than the usual google results. We want to know how the movies are rated considering both box office success and the popularity of the lead actors.
 So, unlike traditional movie rating, this data visualization is aimed to display data in a more dynamic way, which allows the users to choose the top 2 factors about a movie that matters most to them in addition to traditional filters. For example, if someone would like to see a movie that receives higher box office success and higher actor likes rather than just finding a movie with highest score rating, he can find just the right recommendations and customized ordering of the movies based on our visualization. 
-Now, get your popcorn ready, and see what our data visualization can surprise you with movie rankings that you’ve never thought about.
+Now, get your popcorn ready, and see what our data visualization can surprise you with movie rankings and recommendations that you’ve never seen.
 
 Data Description:
 /*where we got the data. Nurpur, can you fill in this part? Thanks! */
@@ -19,3 +19,8 @@ On the left side of the website, the users are able to choose filters and factor
 
 To improve usability, we had incorporated some features for the interaction. If none of the filter or the factor is chosen, defaults to the filters are “all”, and default factors are budget and gross. This prevents the program from crushing. Also, it will give a statement to ask the users change filter selection if no movie satisfies the selected filters.
 
+Team Contribution:
+Ming Cheng(mc2637)
+1. Data organization and combination
+2. Scatterplot construction and styling
+3. Title animation
